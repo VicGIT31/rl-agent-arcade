@@ -1,0 +1,31 @@
+# Hyperparameters for training PPO-from-scratch on Snake.
+# Tuned for fast CPU training (minutes, not hours).
+
+env:
+  grid_size: 12
+  max_steps_without_food: null   # defaults to grid_size^2
+
+ppo:
+  hidden_dim: 128
+  lr: 0.0003
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_eps: 0.2
+  entropy_coef: 0.01
+  value_coef: 0.5
+  max_grad_norm: 0.5
+  update_epochs: 4
+  minibatch_size: 256
+  rollout_steps: 2048
+
+train:
+  total_timesteps: 1500000
+  seed: 0
+  device: cpu
+  log_dir: runs/snake_ppo
+  checkpoint_dir: checkpoints
+  # Save a checkpoint every N updates so we can build the progression GIFs
+  # (random -> mid-training -> expert).
+  checkpoint_every_updates: 25
+  eval_every_updates: 10
+  eval_episodes: 20

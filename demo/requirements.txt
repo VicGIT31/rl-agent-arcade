@@ -1,0 +1,5 @@
+# Dependencies for the Hugging Face Space (demo only — keep this minimal).
+gymnasium>=0.29
+numpy>=1.24
+torch>=2.0
+gradio>=4.0
