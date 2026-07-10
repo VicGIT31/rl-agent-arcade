@@ -40,16 +40,23 @@ evaluation → progression GIFs → live demo.
 Trained for **1.2M environment steps (~10 min on a single CPU core)**, evaluated
 with the greedy policy over **100 episodes** on a 12×12 grid:
 
-| Metric (100 eval episodes) | Random policy | **PPO from scratch** |
-| --- | :---: | :---: |
-| Mean game score (food eaten) | 0.06 | **22.53** |
-| Max score in a single game | 1 | **37** |
-| Mean episode reward | −9.51 | **+218.13** |
-| Mean episode length (steps survived) | 30 | **368** |
+| Metric (100 eval episodes) | Random policy | **PPO from scratch** | SB3 PPO (baseline) |
+| --- | :---: | :---: | :---: |
+| Mean game score (food eaten) | 0.06 | **22.53** | 21.63 |
+| Max score in a single game | 1 | **37** | 41 |
+| Mean episode reward | −9.51 | **+218.13** | — |
+| Mean episode length (steps survived) | 30 | **368** | — |
 
 **~375× the random policy's mean score**, going from "dies almost immediately"
 to filling roughly a quarter of the board. The takeoff is clearly visible in the
 learning curve below, around 550k steps.
+
+**Against the baseline:** the from-scratch PPO reaches **~104% of
+Stable-Baselines3's mean score** (22.53 vs 21.63). SB3 got there in fewer
+environment steps (400k with 4 parallel envs vs 1.2M single-env), which is
+expected from a heavily-optimised library — but the from-scratch agent matches
+its final quality, which is the point: the hand-written PPO is correct, not just
+"learning something."
 <!-- METRICS:END -->
 
 ![learning curve](media/learning_curve.png)
@@ -168,9 +175,10 @@ tensorboard --logdir runs
 * **The PPO details that "don't matter" until they do:** advantage
   normalisation, orthogonal init with a small gain on the policy head, and
   gradient clipping each moved training from unstable to smooth.
-* **A trusted baseline is a debugging tool.** Getting SB3 to learn the env first
-  meant that when my from-scratch agent misbehaved, I knew to look at my PPO
-  code, not the environment.
+* **A trusted baseline is a debugging tool.** Training SB3's PPO on the same
+  environment first confirmed the task was solvable (it reached mean score
+  21.63), so any misbehaviour of the from-scratch agent pointed at my PPO code
+  rather than the environment — and in the end the two match within ~4%.
 
 ## Deploying the demo
 
