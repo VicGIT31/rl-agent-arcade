@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rl-agent-arcade"
+version = "0.1.0"
+description = "PPO from scratch learning to master arcade games (Snake), with a live demo."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "VicGIT31" }]
+dependencies = [
+    "gymnasium>=0.29",
+    "numpy>=1.24",
+    "torch>=2.0",
+    "pyyaml>=6.0",
+    "imageio>=2.31",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+baseline = ["stable-baselines3>=2.2"]
+demo = ["gradio>=4.0", "huggingface_hub>=0.20"]
+
+[tool.setuptools]
+packages = ["envs", "agents", "training", "evaluation"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

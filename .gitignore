@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Training artifacts
+runs/
+logs/
+tensorboard/
+*.log
+
+# Checkpoints (keep only the best model, tracked explicitly)
+checkpoints/*
+!checkpoints/.gitkeep
+!checkpoints/best_model.pt
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Notebooks
+.ipynb_checkpoints/

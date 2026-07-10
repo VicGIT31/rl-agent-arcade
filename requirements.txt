@@ -1,0 +1,11 @@
+gymnasium>=0.29
+numpy>=1.24
+torch>=2.0
+stable-baselines3>=2.2
+opencv-python>=4.8
+imageio>=2.31
+tensorboard>=2.15
+pyyaml>=6.0
+gradio>=4.0
+huggingface_hub>=0.20
+pytest>=7.4
